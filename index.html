@@ -1,582 +1,1070 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>um lugar só nosso</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>um lugar só nosso</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-  body {
-    background: #0f0d0b;
-    min-height: 100vh;
-    font-family: 'Inter', sans-serif;
-    color: #fff;
-    overflow-x: hidden;
-  }
+      body {
+        background: #0f0d0b;
+        min-height: 100vh;
+        font-family: "Inter", sans-serif;
+        color: #fff;
+        overflow-x: hidden;
+      }
 
-  .layout {
-    display: grid;
-    grid-template-columns: 1fr 420px;
-    min-height: 100vh;
-    align-items: stretch;
-  }
+      .layout {
+        display: grid;
+        grid-template-columns: 1fr 420px;
+        min-height: 100vh;
+        align-items: stretch;
+      }
 
-  .left-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 3rem 2rem 3rem;
-    gap: 1.6rem;
-  }
+      .left-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 3rem 2rem 3rem;
+        gap: 1.6rem;
+      }
 
-  .app-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 21px;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    color: #b89a7a;
-    opacity: 0.7;
-    text-align: center;
-  }
+      .app-title {
+        font-family: "Playfair Display", serif;
+        font-size: 21px;
+        font-weight: 400;
+        letter-spacing: 0.1em;
+        color: #b89a7a;
+        opacity: 0.7;
+        text-align: center;
+      }
 
-  .timer-section {
-    width: 100%;
-    background: #161310;
-    border: 1px solid #2a2318;
-    border-radius: 16px;
-    padding: 1.6rem 1.25rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .timer-section::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: #4A90D9;
-  }
+      .timer-section {
+        width: 100%;
+        background: #161310;
+        border: 1px solid #2a2318;
+        border-radius: 16px;
+        padding: 1.6rem 1.25rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .timer-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: #4a90d9;
+      }
 
-  .section-label {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    opacity: 0.35;
-    text-align: center;
-    color: #d4b896;
-  }
+      .section-label {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        opacity: 0.35;
+        text-align: center;
+        color: #d4b896;
+      }
 
-  .timer-display {
-    display: flex;
-    gap: 0.3rem;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 0.3rem 0 0.1rem;
-  }
+      .timer-display {
+        display: flex;
+        gap: 0.3rem;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 0.3rem 0 0.1rem;
+      }
 
-  .timer-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-  }
+      .timer-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+      }
 
-  .timer-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 44px;
-    font-weight: 700;
-    line-height: 1;
-    color: #4A90D9;
-  }
+      .timer-num {
+        font-family: "Playfair Display", serif;
+        font-size: 44px;
+        font-weight: 700;
+        line-height: 1;
+        color: #4a90d9;
+      }
 
-  .timer-unit {
-    font-size: 8px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    opacity: 0.3;
-    color: #d4b896;
-  }
+      .timer-unit {
+        font-size: 8px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        opacity: 0.3;
+        color: #d4b896;
+      }
 
-  .timer-sep {
-    font-family: 'Playfair Display', serif;
-    font-size: 34px;
-    color: #4A90D9;
-    opacity: 0.2;
-    padding-bottom: 10px;
-    line-height: 1;
-  }
+      .timer-sep {
+        font-family: "Playfair Display", serif;
+        font-size: 34px;
+        color: #4a90d9;
+        opacity: 0.2;
+        padding-bottom: 10px;
+        line-height: 1;
+      }
 
-  .section-sub {
-    font-size: 10px;
-    opacity: 0.22;
-    text-align: center;
-    color: #d4b896;
-  }
+      .section-sub {
+        font-size: 10px;
+        opacity: 0.22;
+        text-align: center;
+        color: #d4b896;
+      }
 
-  .cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    width: 100%;
-  }
+      .cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        width: 100%;
+      }
 
-  .card {
-    background: #161310;
-    border: 1px solid #2a2318;
-    border-radius: 16px;
-    padding: 1.5rem 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.3rem;
-    position: relative;
-    overflow: hidden;
-  }
+      .card {
+        background: #161310;
+        border: 1px solid #2a2318;
+        border-radius: 16px;
+        padding: 1.5rem 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+        position: relative;
+        overflow: hidden;
+      }
 
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-  }
-  .card.brown::before { background: #C8956C; }
-  .card.yellow::before { background: #F5C842; }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+      }
+      .card.brown::before {
+        background: #c8956c;
+      }
+      .card.yellow::before {
+        background: #f5c842;
+      }
 
-  .card-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 64px;
-    font-weight: 700;
-    line-height: 1;
-    margin: 0.1rem 0;
-  }
-  .card.brown .card-number { color: #C8956C; }
-  .card.yellow .card-number { color: #F5C842; }
+      .card-number {
+        font-family: "Playfair Display", serif;
+        font-size: 64px;
+        font-weight: 700;
+        line-height: 1;
+        margin: 0.1rem 0;
+      }
+      .card.brown .card-number {
+        color: #c8956c;
+      }
+      .card.yellow .card-number {
+        color: #f5c842;
+      }
 
-  .card-unit {
-    font-size: 11px;
-    opacity: 0.22;
-    letter-spacing: 0.05em;
-    color: #d4b896;
-  }
+      .card-unit {
+        font-size: 11px;
+        opacity: 0.22;
+        letter-spacing: 0.05em;
+        color: #d4b896;
+      }
 
-  .card-sub {
-    font-size: 10px;
-    opacity: 0.2;
-    text-align: center;
-    min-height: 13px;
-    color: #d4b896;
-  }
+      .card-sub {
+        font-size: 10px;
+        opacity: 0.2;
+        text-align: center;
+        min-height: 13px;
+        color: #d4b896;
+      }
 
-  /* ── CARROSSEL ── */
-  .carousel-wrap {
-    width: 100%;
-    position: relative;
-  }
+      /* ── CARROSSEL ── */
+      .carousel-wrap {
+        width: 100%;
+        position: relative;
+      }
 
-  .carousel-track-outer {
-    overflow: hidden;
-    border-radius: 12px;
-    width: 100%;
-  }
+      .carousel-track-outer {
+        overflow: hidden;
+        border-radius: 12px;
+        width: 100%;
+      }
 
-  .carousel-track {
-    display: flex;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform;
-  }
+      .carousel-track {
+        display: flex;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform;
+      }
 
-  .carousel-slide {
-    flex: 0 0 100%;
-    aspect-ratio: 16 / 7;
-    position: relative;
-    background: #161310;
-    border: 1px solid #2a2318;
-    border-radius: 12px;
-    overflow: hidden;
-    object-fit: contain;
-  }
+      .carousel-slide {
+        flex: 0 0 100%;
+        aspect-ratio: 16 / 7;
+        position: relative;
+        background: #161310;
+        border: 1px solid #2a2318;
+        border-radius: 12px;
+        overflow: hidden;
+        object-fit: contain;
+      }
 
-  .carousel-slide img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    transition: transform 0.35s;
-  }
-  .carousel-slide:hover img { transform: scale(1.03); }
+      .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+        transition: transform 0.35s;
+      }
+      .carousel-slide:hover img {
+        transform: scale(1.03);
+      }
 
-  .carousel-slide-ph {
-    width: 100%; height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    color: #3a3028;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
+      .carousel-slide-ph {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        color: #3a3028;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
 
-  .carousel-dots {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-    margin-top: 10px;
-  }
-  .dot {
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: #3a3028;
-    transition: background 0.2s, transform 0.2s;
-    cursor: pointer;
-  }
-  .dot.active { background: #C8956C; transform: scale(1.3); }
+      .carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 10px;
+      }
+      .dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #3a3028;
+        transition:
+          background 0.2s,
+          transform 0.2s;
+        cursor: pointer;
+      }
+      .dot.active {
+        background: #c8956c;
+        transform: scale(1.3);
+      }
 
-  .carousel-arrow {
-    position: absolute;
-    top: calc(50% - 12px);
-    transform: translateY(-50%);
-    background: rgba(15,13,11,0.7);
-    border: 1px solid #3a3028;
-    border-radius: 50%;
-    width: 30px; height: 30px;
-    color: #888;
-    font-size: 18px;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    z-index: 2;
-    transition: color 0.2s, border-color 0.2s;
-    user-select: none;
-    line-height: 1;
-  }
-  .carousel-arrow:hover { color: #C8956C; border-color: #C8956C; }
-  .carousel-arrow.prev { left: 8px; }
-  .carousel-arrow.next { right: 8px; }
+      .carousel-arrow {
+        position: absolute;
+        top: calc(50% - 12px);
+        transform: translateY(-50%);
+        background: rgba(15, 13, 11, 0.7);
+        border: 1px solid #3a3028;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        color: #888;
+        font-size: 18px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+        user-select: none;
+        line-height: 1;
+      }
+      .carousel-arrow:hover {
+        color: #c8956c;
+        border-color: #c8956c;
+      }
+      .carousel-arrow.prev {
+        left: 8px;
+      }
+      .carousel-arrow.next {
+        right: 8px;
+      }
 
-  /* ── COLUNA DIREITA ── */
-  .right-col {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    border-left: 1px solid #1e1a14;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
+      /* ── COLUNA DIREITA ── */
+      .right-col {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        border-left: 1px solid #1e1a14;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
 
-  .main-photo-wrap {
-    flex: 1;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    background: #131008;
-  }
+      .main-photo-wrap {
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: #131008;
+      }
 
-  .main-photo-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
+      .main-photo-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
 
-  .main-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, rgba(15,13,11,0.4) 0%, transparent 35%);
-    pointer-events: none;
-  }
+      .main-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to right,
+          rgba(15, 13, 11, 0.4) 0%,
+          transparent 35%
+        );
+        pointer-events: none;
+      }
 
-  .main-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    color: #2e2820;
-    width: 100%; height: 100%;
-    text-align: center;
-    padding: 2rem;
-  }
-  .main-placeholder p {
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    opacity: 0.5;
-  }
+      .main-placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        color: #2e2820;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        padding: 2rem;
+      }
+      .main-placeholder p {
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        opacity: 0.5;
+      }
 
-  /* ── TOAST ── */
-  .toast {
-    position: fixed;
-    bottom: 2rem; left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: #1e1a14;
-    border: 1px solid #3a3028;
-    border-radius: 10px;
-    padding: 9px 18px;
-    font-size: 12px;
-    color: #F5C842;
-    opacity: 0;
-    transition: opacity 0.3s, transform 0.3s;
-    pointer-events: none;
-    white-space: nowrap;
-    z-index: 999;
-  }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+      /* ── TOAST ── */
+      .toast {
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        background: #1e1a14;
+        border: 1px solid #3a3028;
+        border-radius: 10px;
+        padding: 9px 18px;
+        font-size: 12px;
+        color: #f5c842;
+        opacity: 0;
+        transition:
+          opacity 0.3s,
+          transform 0.3s;
+        pointer-events: none;
+        white-space: nowrap;
+        z-index: 999;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
 
-  @media (max-width: 768px) {
-    .layout { grid-template-columns: 1fr; }
-    .right-col { position: relative; height: 70vw; border-left: none; border-top: 1px solid #1e1a14; }
-    .timer-num { font-size: 34px; }
-    .card-number { font-size: 50px; }
-  }
-</style>
-</head>
-<body>
+      .card {
+        width: 100%;
+        max-width: 480px;
+        background: #161310;
+        border: 1px solid #2a2318;
+        border-radius: 20px;
+        padding: 2.5rem 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        position: relative;
+        overflow: hidden;
+      }
 
-<div class="layout">
-  <div class="left-col">
-    <p class="app-title">um lugar só nosso (eu + meu amor) </p>
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #c8956c, #f5c842);
+      }
 
-    <section class="timer-section">
-      <p class="section-label">tempo para o mês do pedido de namoro</p>
-      <div class="timer-display">
-        <div class="timer-block">
-          <span class="timer-num" id="c-days">00</span>
-          <span class="timer-unit">dias</span>
+      .page-title {
+        font-family: "Playfair Display", serif;
+        font-size: 18px;
+        font-weight: 400;
+        color: #b89a7a;
+        opacity: 0.55;
+        letter-spacing: 0.06em;
+        text-align: center;
+      }
+
+      .divider {
+        width: 40px;
+        height: 1px;
+        background: #2a2318;
+        margin: 0.4rem 0;
+      }
+
+      .label {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #d4b896;
+        opacity: 0.38;
+        text-align: center;
+      }
+
+      .together-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.4rem 0.8rem;
+        margin: 0.5rem 0 0.2rem;
+      }
+
+      .together-block {
+        display: flex;
+        align-items: baseline;
+        gap: 0.3rem;
+      }
+
+      .together-num {
+        font-family: "Playfair Display", serif;
+        font-size: 56px;
+        font-weight: 700;
+        line-height: 1;
+        background: linear-gradient(135deg, #c8956c 30%, #f5c842 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .together-num.small {
+        font-size: 38px;
+      }
+
+      .together-unit {
+        font-size: 13px;
+        color: #d4b896;
+        opacity: 0.38;
+        letter-spacing: 0.04em;
+        padding-bottom: 6px;
+      }
+
+      .together-sep {
+        font-size: 12px;
+        color: #d4b896;
+        opacity: 0.18;
+        padding-bottom: 6px;
+        letter-spacing: 0.1em;
+      }
+
+      .bar-wrap {
+        width: 100%;
+        height: 3px;
+        background: #2a2318;
+        border-radius: 99px;
+        overflow: hidden;
+        margin: 0.7rem 0 0.15rem;
+      }
+
+      .bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #c8956c, #f5c842);
+        border-radius: 99px;
+        transition: width 0.8s ease;
+      }
+
+      .bar-pct {
+        font-size: 9px;
+        color: #d4b896;
+        opacity: 0.2;
+        letter-spacing: 0.08em;
+        align-self: flex-end;
+        margin-top: -2px;
+      }
+
+      .countdown-label {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #d4b896;
+        opacity: 0.28;
+        text-align: center;
+        margin-top: 0.6rem;
+      }
+
+      .countdown {
+        display: flex;
+        gap: 0.35rem;
+        align-items: flex-end;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 0.3rem 0 0.1rem;
+      }
+
+      .block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .num {
+        font-family: "Playfair Display", serif;
+        font-size: 36px;
+        font-weight: 700;
+        line-height: 1;
+        color: #c8956c;
+      }
+
+      .unit {
+        font-size: 8px;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: #d4b896;
+        opacity: 0.25;
+      }
+
+      .sep {
+        font-family: "Playfair Display", serif;
+        font-size: 26px;
+        color: #c8956c;
+        opacity: 0.16;
+        padding-bottom: 7px;
+        line-height: 1;
+      }
+
+      .next-date {
+        font-size: 11px;
+        color: #d4b896;
+        opacity: 0.2;
+        text-align: center;
+        margin-top: 4px;
+        letter-spacing: 0.03em;
+      }
+
+      @media (max-width: 768px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        .right-col {
+          position: relative;
+          height: 70vw;
+          border-left: none;
+          border-top: 1px solid #1e1a14;
+        }
+        .timer-num {
+          font-size: 34px;
+        }
+        .card-number {
+          font-size: 50px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <div class="left-col">
+        <p class="app-title">um lugar só nosso (eu + meu amor)</p>
+
+        <section class="timer-section">
+          <p class="section-label">tempo para o mês do pedido de namoro</p>
+          <div class="timer-display">
+            <div class="timer-block">
+              <span class="timer-num" id="c-days">00</span>
+              <span class="timer-unit">dias</span>
+            </div>
+            <span class="timer-sep">:</span>
+            <div class="timer-block">
+              <span class="timer-num" id="c-hours">00</span>
+              <span class="timer-unit">horas</span>
+            </div>
+            <span class="timer-sep">:</span>
+            <div class="timer-block">
+              <span class="timer-num" id="c-mins">00</span>
+              <span class="timer-unit">minutos</span>
+            </div>
+            <span class="timer-sep">:</span>
+            <div class="timer-block">
+              <span class="timer-num" id="c-secs">00</span>
+              <span class="timer-unit">segundos</span>
+            </div>
+          </div>
+          <p class="section-sub">Novembro de 2026</p>
+        </section>
+
+        <div class="cards">
+          <div class="card brown">
+            <p class="section-label">dias que nos conhecemos</p>
+            <p class="card-number" id="days-known">0</p>
+            <p class="card-unit">dias</p>
+            <p class="card-sub">desde 16 de maio de 2026</p>
+          </div>
+
+          <div class="card yellow">
+            <p class="section-label">vezes que nos vimos</p>
+            <p class="card-number" id="times-seen">0</p>
+            <p class="card-unit">encontros</p>
+            <p class="card-sub" id="seen-sub"></p>
+          </div>
+
+          <div class="card">
+            <p class="page-title">um lugar só nosso</p>
+            <div class="divider"></div>
+
+            <p class="label">tempo juntos</p>
+            <div class="together-row" id="together-row"></div>
+
+            <div class="bar-wrap">
+              <div class="bar-fill" id="bar-fill" style="width: 0%"></div>
+            </div>
+            <p class="bar-pct" id="bar-pct">0%</p>
+
+            <p class="countdown-label" id="countdown-label">
+              falta para o próximo mesiversário
+            </p>
+
+            <div class="countdown">
+              <div class="block">
+                <span class="num" id="m-days">00</span
+                ><span class="unit">dias</span>
+              </div>
+              <span class="sep">:</span>
+              <div class="block">
+                <span class="num" id="m-hours">00</span
+                ><span class="unit">horas</span>
+              </div>
+              <span class="sep">:</span>
+              <div class="block">
+                <span class="num" id="m-mins">00</span
+                ><span class="unit">minutos</span>
+              </div>
+              <span class="sep">:</span>
+              <div class="block">
+                <span class="num" id="m-secs">00</span
+                ><span class="unit">segundos</span>
+              </div>
+            </div>
+
+            <p class="next-date" id="next-date"></p>
+          </div>
         </div>
-        <span class="timer-sep">:</span>
-        <div class="timer-block">
-          <span class="timer-num" id="c-hours">00</span>
-          <span class="timer-unit">horas</span>
-        </div>
-        <span class="timer-sep">:</span>
-        <div class="timer-block">
-          <span class="timer-num" id="c-mins">00</span>
-          <span class="timer-unit">minutos</span>
-        </div>
-        <span class="timer-sep">:</span>
-        <div class="timer-block">
-          <span class="timer-num" id="c-secs">00</span>
-          <span class="timer-unit">segundos</span>
+
+        <div class="carousel-wrap">
+          <div class="carousel-track-outer">
+            <div class="carousel-track" id="carousel-track"></div>
+          </div>
+          <button
+            class="carousel-arrow prev"
+            id="carr-prev"
+            onclick="carMove(-1)"
+          >
+            &#8249;
+          </button>
+          <button
+            class="carousel-arrow next"
+            id="carr-next"
+            onclick="carMove(1)"
+          >
+            &#8250;
+          </button>
+          <div class="carousel-dots" id="carousel-dots"></div>
         </div>
       </div>
-      <p class="section-sub">Novembro de 2026</p>
-    </section>
 
-    <div class="cards">
-      <div class="card brown">
-        <p class="section-label">dias que nos conhecemos</p>
-        <p class="card-number" id="days-known">0</p>
-        <p class="card-unit">dias</p>
-        <p class="card-sub">desde 16 de maio de 2026</p>
+      <div class="right-col">
+        <div class="main-photo-wrap" id="main-wrap"></div>
       </div>
-
-      <div class="card yellow">
-        <p class="section-label">vezes que nos vimos</p>
-        <p class="card-number" id="times-seen">0</p>
-        <p class="card-unit">encontros</p>
-        <p class="card-sub" id="seen-sub"> </p>
+      <div style="text-align: center; font-size: 25px; padding: 0 2% 5%">
+        <p>
+          <span style="color: rgb(240, 84, 84)">💞❤️ Eu te amo</span> muito meu
+          AMOR, <br />você é o amor da minha vida e pra sempre será a minha
+          mulher 💞❤️
+        </p>
       </div>
     </div>
 
-    <div class="carousel-wrap">
-      <div class="carousel-track-outer">
-        <div class="carousel-track" id="carousel-track"></div>
-      </div>
-      <button class="carousel-arrow prev" id="carr-prev" onclick="carMove(-1)">&#8249;</button>
-      <button class="carousel-arrow next" id="carr-next" onclick="carMove(1)">&#8250;</button>
-      <div class="carousel-dots" id="carousel-dots"></div>
-    </div>
-  </div>
+    <div class="toast" id="toast"></div>
 
-  <div class="right-col">
-    <div class="main-photo-wrap" id="main-wrap"></div>
-  </div>
-  <div style="text-align: center; font-size: 25px; padding: 0 2% 5%;"> <p><span style="color: rgb(240, 84, 84)">💞❤️ Eu te amo</span> muito meu AMOR, <br>você é o amor da minha vida e pra sempre será a minha mulher 💞❤️</p></div>
-</div>
+    <script>
+      // ==========================================================
+      //  ✏️  EDITE APENAS ESTA SEÇÃO PARA PERSONALIZAR A PÁGINA
+      // ==========================================================
 
-<div class="toast" id="toast"></div>
+      const CONFIG = {
+        // Quantas vezes vocês já se viram
+        vezes_que_nos_vimos: 8,
 
-<script>
-// ==========================================================
-//  ✏️  EDITE APENAS ESTA SEÇÃO PARA PERSONALIZAR A PÁGINA
-// ==========================================================
+        // Caminho ou URL da foto principal (coluna direita)
+        // Coloque o arquivo de imagem na mesma pasta do HTML e use o nome do arquivo.
+        // Exemplo: foto_principal: "foto.jpg"
+        // Deixe vazio ("") para mostrar espaço em branco
+        foto_principal: "img/img-principal.jpeg",
 
-const CONFIG = {
+        // Fotos do carrossel — adicione quantas quiser
+        // Exemplo: ["foto1.jpg", "foto2.jpg", "https://..."]
+        fotos_carrossel: [
+          "img/img1-carrossel.jpeg",
+          "img/img2-carrossel.jpeg",
+          "img/img3-carrossel.jpeg",
+          "img/img4-carrossel.jpeg",
+          "img/img5-carrossel.jpeg",
+          // "foto1.jpg",
+          // "foto2.jpg",
+          // "foto3.jpg",
+        ],
+      };
 
-  // Quantas vezes vocês já se viram
-  vezes_que_nos_vimos: 8,
+      // ==========================================================
+      //  🔒  NÃO EDITE ABAIXO DESTA LINHA
+      // ==========================================================
 
-  // Caminho ou URL da foto principal (coluna direita)
-  // Coloque o arquivo de imagem na mesma pasta do HTML e use o nome do arquivo.
-  // Exemplo: foto_principal: "foto.jpg"
-  // Deixe vazio ("") para mostrar espaço em branco
-  foto_principal: "img/img-principal.jpeg",
+      // Contador fixo
+      function renderSeen() {
+        const n = CONFIG.vezes_que_nos_vimos;
+        document.getElementById("times-seen").textContent = n;
+        document.getElementById("seen-sub").textContent =
+          n === 0
+            ? "ainda não nos vimos"
+            : n === 1
+              ? "primeiro encontro ♡"
+              : n + " momentos juntos ♡";
+      }
 
-  // Fotos do carrossel — adicione quantas quiser
-  // Exemplo: ["foto1.jpg", "foto2.jpg", "https://..."]
-  fotos_carrossel: [
-    "img/img1-carrossel.jpeg",
-    "img/img2-carrossel.jpeg",
-    "img/img3-carrossel.jpeg",
-    "img/img4-carrossel.jpeg",
-    "img/img5-carrossel.jpeg"
-    // "foto1.jpg",
-    // "foto2.jpg",
-    // "foto3.jpg",
-  ],
+      // Temporizador
+      const TARGET = new Date("2026-11-01T00:00:00");
+      function pad(n) {
+        return String(Math.max(0, n)).padStart(2, "0");
+      }
 
-};
+      function updateCountdown() {
+        let diff = Math.floor((TARGET - new Date()) / 1000);
+        if (diff <= 0) {
+          ["c-days", "c-hours", "c-mins", "c-secs"].forEach(
+            (id) => (document.getElementById(id).textContent = "00"),
+          );
+          return;
+        }
+        document.getElementById("c-days").textContent = pad(
+          Math.floor(diff / 86400),
+        );
+        document.getElementById("c-hours").textContent = pad(
+          Math.floor((diff % 86400) / 3600),
+        );
+        document.getElementById("c-mins").textContent = pad(
+          Math.floor((diff % 3600) / 60),
+        );
+        document.getElementById("c-secs").textContent = pad(diff % 60);
+      }
 
-// ==========================================================
-//  🔒  NÃO EDITE ABAIXO DESTA LINHA
-// ==========================================================
+      // Dias nos conhecendo
+      function updateDaysKnown() {
+        const start = new Date("2026-05-16T00:00:00");
+        const now = new Date();
+        now.setHours(0, 0, 0, 0);
+        document.getElementById("days-known").textContent = Math.max(
+          0,
+          Math.floor((now - start) / 86400000),
+        );
+      }
 
-  // Contador fixo
-  function renderSeen() {
-    const n = CONFIG.vezes_que_nos_vimos;
-    document.getElementById('times-seen').textContent = n;
-    document.getElementById('seen-sub').textContent =
-      n === 0 ? 'ainda não nos vimos' :
-      n === 1 ? 'primeiro encontro ♡' :
-      n + ' momentos juntos ♡';
-  }
-
-  // Temporizador
-  const TARGET = new Date('2026-11-01T00:00:00');
-  function pad(n) { return String(Math.max(0, n)).padStart(2, '0'); }
-
-  function updateCountdown() {
-    let diff = Math.floor((TARGET - new Date()) / 1000);
-    if (diff <= 0) {
-      ['c-days','c-hours','c-mins','c-secs'].forEach(id => document.getElementById(id).textContent = '00');
-      return;
-    }
-    document.getElementById('c-days').textContent  = pad(Math.floor(diff / 86400));
-    document.getElementById('c-hours').textContent = pad(Math.floor((diff % 86400) / 3600));
-    document.getElementById('c-mins').textContent  = pad(Math.floor((diff % 3600) / 60));
-    document.getElementById('c-secs').textContent  = pad(diff % 60);
-  }
-
-  // Dias nos conhecendo
-  function updateDaysKnown() {
-    const start = new Date('2026-05-16T00:00:00');
-    const now = new Date(); now.setHours(0,0,0,0);
-    document.getElementById('days-known').textContent = Math.max(0, Math.floor((now - start) / 86400000));
-  }
-
-  // Foto principal
-  function renderMainPhoto() {
-    const wrap = document.getElementById('main-wrap');
-    if (!CONFIG.foto_principal) {
-      wrap.innerHTML = `<div class="main-placeholder">
+      // Foto principal
+      function renderMainPhoto() {
+        const wrap = document.getElementById("main-wrap");
+        if (!CONFIG.foto_principal) {
+          wrap.innerHTML = `<div class="main-placeholder">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
           <polyline points="21 15 16 10 5 21"/>
         </svg>
         <p>adicione o caminho da foto em CONFIG.foto_principal</p>
       </div>`;
-      return;
-    }
-    wrap.innerHTML = '';
-    const img = document.createElement('img');
-    img.src = CONFIG.foto_principal;
-    img.alt = 'nossa foto';
-    const ov = document.createElement('div');
-    ov.className = 'main-overlay';
-    wrap.appendChild(img);
-    wrap.appendChild(ov);
-  }
+          return;
+        }
+        wrap.innerHTML = "";
+        const img = document.createElement("img");
+        img.src = CONFIG.foto_principal;
+        img.alt = "nossa foto";
+        const ov = document.createElement("div");
+        ov.className = "main-overlay";
+        wrap.appendChild(img);
+        wrap.appendChild(ov);
+      }
 
-  // Carrossel
-  let carIdx = 0;
-  const slides = CONFIG.fotos_carrossel;
+      // Carrossel
+      let carIdx = 0;
+      const slides = CONFIG.fotos_carrossel;
 
-  function renderCarousel() {
-    const track = document.getElementById('carousel-track');
-    const dots  = document.getElementById('carousel-dots');
-    track.innerHTML = '';
-    dots.innerHTML  = '';
+      function renderCarousel() {
+        const track = document.getElementById("carousel-track");
+        const dots = document.getElementById("carousel-dots");
+        track.innerHTML = "";
+        dots.innerHTML = "";
 
-    if (slides.length === 0) {
-      const slide = document.createElement('div');
-      slide.className = 'carousel-slide';
-      slide.innerHTML = `<div class="carousel-slide-ph">
+        if (slides.length === 0) {
+          const slide = document.createElement("div");
+          slide.className = "carousel-slide";
+          slide.innerHTML = `<div class="carousel-slide-ph">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
           <polyline points="21 15 16 10 5 21"/>
         </svg>
         <span>adicione fotos em CONFIG.fotos_carrossel</span>
       </div>`;
-      track.appendChild(slide);
-      return;
-    }
+          track.appendChild(slide);
+          return;
+        }
 
-    slides.forEach((src, i) => {
-      const slide = document.createElement('div');
-      slide.className = 'carousel-slide';
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = 'memória ' + (i + 1);
-      slide.appendChild(img);
-      track.appendChild(slide);
+        slides.forEach((src, i) => {
+          const slide = document.createElement("div");
+          slide.className = "carousel-slide";
+          const img = document.createElement("img");
+          img.src = src;
+          img.alt = "memória " + (i + 1);
+          slide.appendChild(img);
+          track.appendChild(slide);
 
-      const dot = document.createElement('div');
-      dot.className = 'dot' + (i === carIdx ? ' active' : '');
-      dot.onclick = () => carGoTo(i);
-      dots.appendChild(dot);
-    });
+          const dot = document.createElement("div");
+          dot.className = "dot" + (i === carIdx ? " active" : "");
+          dot.onclick = () => carGoTo(i);
+          dots.appendChild(dot);
+        });
 
-    carGoTo(0, false);
-    updateArrows();
-  }
+        carGoTo(0, false);
+        updateArrows();
+      }
 
-  function carGoTo(idx, animate = true) {
-    const track = document.getElementById('carousel-track');
-    carIdx = Math.max(0, Math.min(idx, slides.length - 1));
-    if (!animate) track.style.transition = 'none';
-    track.style.transform = `translateX(-${carIdx * 100}%)`;
-    if (!animate) { track.offsetHeight; track.style.transition = ''; }
-    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === carIdx));
-    updateArrows();
-  }
+      function carGoTo(idx, animate = true) {
+        const track = document.getElementById("carousel-track");
+        carIdx = Math.max(0, Math.min(idx, slides.length - 1));
+        if (!animate) track.style.transition = "none";
+        track.style.transform = `translateX(-${carIdx * 100}%)`;
+        if (!animate) {
+          track.offsetHeight;
+          track.style.transition = "";
+        }
+        document
+          .querySelectorAll(".dot")
+          .forEach((d, i) => d.classList.toggle("active", i === carIdx));
+        updateArrows();
+      }
 
-  function carMove(dir) { carGoTo(carIdx + dir); }
+      function carMove(dir) {
+        carGoTo(carIdx + dir);
+      }
 
-  function updateArrows() {
-    document.getElementById('carr-prev').style.opacity = carIdx === 0 ? '0.2' : '1';
-    document.getElementById('carr-next').style.opacity = carIdx >= slides.length - 1 ? '0.2' : '1';
-  }
+      function updateArrows() {
+        document.getElementById("carr-prev").style.opacity =
+          carIdx === 0 ? "0.2" : "1";
+        document.getElementById("carr-next").style.opacity =
+          carIdx >= slides.length - 1 ? "0.2" : "1";
+      }
 
-  // Swipe touch
-  let touchX = null;
-  document.getElementById('carousel-track').addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
-  document.getElementById('carousel-track').addEventListener('touchend', e => {
-    if (touchX === null) return;
-    const dx = e.changedTouches[0].clientX - touchX;
-    if (Math.abs(dx) > 40) carMove(dx < 0 ? 1 : -1);
-    touchX = null;
-  });
+      // Swipe touch
+      let touchX = null;
+      document
+        .getElementById("carousel-track")
+        .addEventListener("touchstart", (e) => {
+          touchX = e.touches[0].clientX;
+        });
+      document
+        .getElementById("carousel-track")
+        .addEventListener("touchend", (e) => {
+          if (touchX === null) return;
+          const dx = e.changedTouches[0].clientX - touchX;
+          if (Math.abs(dx) > 40) carMove(dx < 0 ? 1 : -1);
+          touchX = null;
+        });
 
-  // Init
-  renderSeen();
-  updateDaysKnown();
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-  setInterval(updateDaysKnown, 60000);
-  renderMainPhoto();
-  renderCarousel();
-</script>
-</body>
+      // Init
+      renderSeen();
+      updateDaysKnown();
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+      setInterval(updateDaysKnown, 60000);
+      renderMainPhoto();
+      renderCarousel();
+
+      const INICIO = new Date("2026-05-16T00:00:00");
+
+      function pad(n) {
+        return String(Math.max(0, n)).padStart(2, "0");
+      }
+
+      // Último dia 16 que já passou (inclusive hoje se for exatamente dia 16 00:00)
+      function ultimoDia16(from) {
+        const d = new Date(from);
+        d.setDate(16);
+        d.setHours(0, 0, 0, 0);
+        if (d > from) d.setMonth(d.getMonth() - 1);
+        return d;
+      }
+
+      // Próximo dia 16 (sempre após "from")
+      function proximoDia16(from) {
+        const d = ultimoDia16(from);
+        d.setMonth(d.getMonth() + 1);
+        return d;
+      }
+
+      // Decompõe em meses completos (contados pelo dia 16), semanas e dias restantes
+      function decompoe(totalDias) {
+        // recria a data de "hoje" a partir dos dias totais
+        const dataHoje = new Date(INICIO.getTime() + totalDias * 86400000);
+
+        // meses completos = quantos dias 16 passaram desde o início
+        const meses = Math.max(
+          0,
+          (dataHoje.getFullYear() - INICIO.getFullYear()) * 12 +
+            (dataHoje.getMonth() - INICIO.getMonth()),
+        );
+
+        // data após subtrair os meses completos
+        const aposMeses = new Date(INICIO);
+        aposMeses.setMonth(aposMeses.getMonth() + meses);
+
+        const diasRestantes = Math.max(
+          0,
+          Math.floor((dataHoje - aposMeses) / 86400000),
+        );
+        const semanas = Math.floor(diasRestantes / 7);
+        const dias = diasRestantes % 7;
+
+        return { meses, semanas, dias };
+      }
+
+      function update() {
+        const now = new Date();
+        const prev = ultimoDia16(now);
+        const next = proximoDia16(now);
+
+        // dias inteiros completos desde o início
+        const hoje = new Date(now);
+        hoje.setHours(0, 0, 0, 0);
+        const totalDias = Math.max(0, Math.floor((hoje - INICIO) / 86400000));
+
+        const { meses, semanas, dias } = decompoe(totalDias);
+
+        // ── monta linha "tempo juntos" ──
+        const row = document.getElementById("together-row");
+        row.innerHTML = "";
+
+        function addBloco(num, texto, small) {
+          const b = document.createElement("div");
+          b.className = "together-block";
+          b.innerHTML =
+            '<span class="together-num' +
+            (small ? " small" : "") +
+            '">' +
+            num +
+            "</span>" +
+            '<span class="together-unit">' +
+            texto +
+            "</span>";
+          return b;
+        }
+
+        function addSep() {
+          const s = document.createElement("span");
+          s.className = "together-sep";
+          s.textContent = "·";
+          return s;
+        }
+
+        // Se ainda é o mesmo dia do início (totalDias === 0), mostra "0 dias"
+        if (totalDias === 0) {
+          row.appendChild(addBloco(0, "dias", false));
+        } else {
+          let primeiro = true;
+          if (meses > 0) {
+            row.appendChild(
+              addBloco(meses, meses === 1 ? "mês" : "meses", false),
+            );
+            primeiro = false;
+          }
+          if (semanas > 0) {
+            if (!primeiro) row.appendChild(addSep());
+            row.appendChild(
+              addBloco(
+                semanas,
+                semanas === 1 ? "semana" : "semanas",
+                meses > 0,
+              ),
+            );
+            primeiro = false;
+          }
+          if (dias > 0) {
+            if (!primeiro) row.appendChild(addSep());
+            row.appendChild(addBloco(dias, dias === 1 ? "dia" : "dias", true));
+          }
+          // se meses > 0 mas semanas e dias são 0, não precisa de nada extra
+        }
+
+        // ── barra de progresso do mês atual ──
+        const totalMs = next - prev;
+        const passouMs = now - prev;
+        const pct = Math.min(100, Math.max(0, (passouMs / totalMs) * 100));
+        document.getElementById("bar-fill").style.width = pct.toFixed(1) + "%";
+        document.getElementById("bar-pct").textContent = pct.toFixed(0) + "%";
+
+        // ── contagem regressiva até o próximo dia 16 ──
+        let diff = Math.floor((next - now) / 1000);
+        if (diff < 0) diff = 0;
+
+        document.getElementById("m-days").textContent = pad(
+          Math.floor(diff / 86400),
+        );
+        document.getElementById("m-hours").textContent = pad(
+          Math.floor((diff % 86400) / 3600),
+        );
+        document.getElementById("m-mins").textContent = pad(
+          Math.floor((diff % 3600) / 60),
+        );
+        document.getElementById("m-secs").textContent = pad(diff % 60);
+
+        // ── label e data ──
+        const proximoMes = meses + 1;
+        document.getElementById("countdown-label").textContent =
+          "falta para o " +
+          proximoMes +
+          (proximoMes === 1 ? "º" : "º") +
+          " mesiversário";
+        document.getElementById("next-date").textContent =
+          "dia 16 de " +
+          next.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+      }
+
+      update();
+      setInterval(update, 1000);
+    </script>
+  </body>
 </html>
