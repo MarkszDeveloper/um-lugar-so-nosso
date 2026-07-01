@@ -939,30 +939,30 @@
 
       // Decompõe em meses completos (contados pelo dia 16), semanas e dias restantes
       function decompoe(totalDias) {
-        // recria a data de "hoje" a partir dos dias totais
         const dataHoje = new Date(INICIO.getTime() + totalDias * 86400000);
 
-        // meses completos = quantos dias 16 passaram desde o início
-        const meses = Math.max(
-          0,
+        let meses =
           (dataHoje.getFullYear() - INICIO.getFullYear()) * 12 +
-            (dataHoje.getMonth() - INICIO.getMonth()),
-        );
+          (dataHoje.getMonth() - INICIO.getMonth());
 
-        // data após subtrair os meses completos
+        // Ainda não chegou ao dia do mês (16)?
+        // Então ainda não completou esse mês.
+        if (dataHoje.getDate() < INICIO.getDate()) {
+          meses--;
+        }
+
+        meses = Math.max(0, meses);
+
         const aposMeses = new Date(INICIO);
         aposMeses.setMonth(aposMeses.getMonth() + meses);
 
-        const diasRestantes = Math.max(
-          0,
-          Math.floor((dataHoje - aposMeses) / 86400000),
-        );
+        const diasRestantes = Math.floor((dataHoje - aposMeses) / 86400000);
+
         const semanas = Math.floor(diasRestantes / 7);
         const dias = diasRestantes % 7;
 
         return { meses, semanas, dias };
       }
-
       function update() {
         const now = new Date();
         const prev = ultimoDia16(now);
