@@ -1,0 +1,24 @@
+{
+  "name": "um-lugar-so-nosso",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarkszDeveloper/um-lugar-so-nosso.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/MarkszDeveloper/um-lugar-so-nosso/issues"
+  },
+  "homepage": "https://github.com/MarkszDeveloper/um-lugar-so-nosso#readme",
+  "dependencies": {
+    "date-fns": "^4.4.0"
+  }
+}
