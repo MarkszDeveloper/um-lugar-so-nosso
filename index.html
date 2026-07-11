@@ -724,7 +724,7 @@
       // ==========================================================
       const CONFIG = {
         // Quantas vezes vocês já se viram
-        vezes_que_nos_vimos: 9,
+        vezes_nos_vimos: 11,
 
         // Caminho ou URL da foto principal (coluna direita)
         // Coloque o arquivo de imagem na mesma pasta do HTML e use o nome do arquivo.
@@ -752,7 +752,7 @@
 
       // Contador fixo
       function renderSeen() {
-        const n = CONFIG.vezes_que_nos_vimos;
+        const n = CONFIG.vezes_nos_vimos;
         document.getElementById("times-seen").textContent = n;
         document.getElementById("seen-sub").textContent =
           n === 0
@@ -763,13 +763,13 @@
       }
 
       // Temporizador
-      const TARGET = new Date("2026-11-01T00:00:00");
+      const DATA_ALVO_PEDIDO_NAMORO = new Date("2026-09-01T00:00:00");
       function pad(n) {
         return String(Math.max(0, n)).padStart(2, "0");
       }
 
       function updateCountdown() {
-        let diff = Math.floor((TARGET - new Date()) / 1000);
+        let diff = Math.floor((DATA_ALVO_PEDIDO_NAMORO - new Date()) / 1000);
         if (diff <= 0) {
           ["c-days", "c-hours", "c-mins", "c-secs"].forEach(
             (id) => (document.getElementById(id).textContent = "00"),
